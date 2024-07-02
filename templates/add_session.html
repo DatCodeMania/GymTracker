@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Session</title>
+    <script>
+        function addExercise() {
+            var exerciseList = document.getElementById('exerciseList');
+            var newExercise = document.createElement('div');
+            newExercise.className = 'exercise-entry';
+            newExercise.innerHTML = `
+                <label>Sets Done: <input type="number" name="sets_done[]" required></label>
+                <label>Exercise: <input type="text" name="exercise_name[]" required></label>
+                <label>Reps Done: <input type="number" name="reps_done[]" required></label>
+                <button type="button" onclick="removeExercise(this)">Remove</button>
+                <br><br>
+            `;
+            exerciseList.appendChild(newExercise);
+        }
+
+        function removeExercise(button) {
+            var exerciseEntry = button.parentNode;
+            exerciseEntry.parentNode.removeChild(exerciseEntry);
+        }
+    </script>
+</head>
+<body>
+    <h1>Add Session</h1>
+    <form action="/submit" method="post">
+        <label>Select which muscle group(s) you trained:</label><br>
+        <input type="checkbox" id="chest" name="muscle_groups_trained" value="chest">
+        <label for="chest">Chest</label><br>
+        <input type="checkbox" id="back" name="muscle_groups_trained" value="back">
+        <label for="back">Back</label><br>
+        <input type="checkbox" id="legs" name="muscle_groups_trained" value="legs">
+        <label for="legs">Legs</label><br><br>
+
+        <label for="time_started">Time started:</label><br>
+        <input type="time" id="time_started" name="time_started"><br><br>
+
+        <label for="time_stopped">Time stopped:</label><br>
+        <input type="time" id="time_stopped" name="time_stopped"><br><br>
+
+        <label for="rpe">Rate of Perceived Exertion (RPE):</label><br>
+        <input type="number" id="rpe" name="rpe" min="6" max="20"><br><br>
+
+        <label for="exercises_done">Exercises Done:</label><br>
+        <div id="exerciseList"></div>
+        <button type="button" onclick="addExercise()">Add Exercise</button><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
