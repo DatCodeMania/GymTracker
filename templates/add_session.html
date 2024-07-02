@@ -2,19 +2,45 @@
 <html>
 <head>
     <title>Add Session</title>
+    <style>
+        .exercise-entry {
+            margin-left: 20px;
+        }
+        .set-entry {
+            margin-left: 40px;
+        }
+    </style>
     <script>
         function addExercise() {
             var exerciseList = document.getElementById('exerciseList');
             var newExercise = document.createElement('div');
             newExercise.className = 'exercise-entry';
             newExercise.innerHTML = `
-                <label>Sets Done: <input type="number" name="sets_done[]" required></label>
                 <label>Exercise: <input type="text" name="exercise_name[]" required></label>
-                <label>Reps Done: <input type="number" name="reps_done[]" required></label>
-                <button type="button" onclick="removeExercise(this)">Remove</button>
+                <label>Sets Done: <input type="number" name="sets_done[]" min="1" required oninput="updateSets(this)"></label>
+                <button type="button" onclick="removeExercise(this)">Remove Exercise</button>
+                <div class="set-list"></div>
                 <br><br>
             `;
             exerciseList.appendChild(newExercise);
+        }
+
+        function updateSets(input) {
+            console.log('updateSets called');
+            console.log('Number of sets:', input.value);
+            var exerciseEntry = input.closest('.exercise-entry');
+            var setList = exerciseEntry.querySelector('.set-list');
+            setList.innerHTML = ''; // Clear existing set entries
+            var numSets = input.value;
+            for (var i = 0; i < numSets; i++) {
+                var newSet = document.createElement('div');
+                newSet.className = 'set-entry';
+                newSet.innerHTML = `
+                    <label>Reps for Set ${i + 1}: <input type="number" name="reps_done[]" required></label>
+                    <br>
+                `;
+                setList.appendChild(newSet);
+            }
         }
 
         function removeExercise(button) {
@@ -43,9 +69,18 @@
         <label for="rpe">Rate of Perceived Exertion (RPE):</label><br>
         <input type="number" id="rpe" name="rpe" min="6" max="20"><br><br>
 
+        <label for="satisfaction_rating">Exercise satisfaction rating (1-5):</label><br>
+        <input type="number" id="satisfaction_rating" name="satisfaction_rating" min="1" max="5"><br><br>
+
+        <label for="motivation_rating">Session motivation rating (1-5):</label><br>
+        <input type="number" id="motivation_rating" name="motivation_rating" min="1" max="5"><br><br>
+
         <label for="exercises_done">Exercises Done:</label><br>
         <div id="exerciseList"></div>
         <button type="button" onclick="addExercise()">Add Exercise</button><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br><br>
 
         <input type="submit" value="Submit">
     </form>
