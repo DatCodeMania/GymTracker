@@ -4,7 +4,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
 @app.route('/about')
@@ -49,10 +49,10 @@ def submit():
         Selected options: {", ".join(selected_options)}<br>
         Time started: {time_started}<br>
         Time stopped: {time_stopped}<br>
-        Dura: {workout_duration}<br>
+        Duration: {workout_duration}mins<br>
         RPE: {rpe}<br>
-        Satisfaction rating: {satisfaction_rating}<br>
-        Motivation rating: {motivation_rating}<br>
+        Satisfaction rating: {satisfaction_rating}/5<br>
+        Motivation rating: {motivation_rating}/5<br>
         Notes: {notes}<br>
         Exercises done: {exercises_done}
     '''
