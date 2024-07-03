@@ -23,7 +23,7 @@ p {
 }
 
 a {
-    color: #82b1ff;
+    color: #9b59b6;
     text-decoration: none;
 }
 
@@ -59,14 +59,39 @@ a:hover {
 }
 
 .progress-bar {
-    background: #82b1ff;
+    background: #8e44ad;
     height: 100%;
     width: 0;
     transition: width 1s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .progress-bar.full {
-    background: #76ff03;
+    background: #27ae60;
+}
+
+.progress-bar.exceeded {
+    background: #e67e22;
+}
+
+.progress-text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 @keyframes fadeIn {

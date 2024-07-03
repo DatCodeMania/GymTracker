@@ -19,37 +19,73 @@
         <p>Welcome to Gym Tracker!</p>
         <div class="statistics">
             <div class="progress-bar-container">
-                <div class="progress-bar" id="progress-bar">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-text-container">
                     <span id="progress-text"></span>
                 </div>
             </div>
-            <p>Average workout duration: <span id="avg-duration">PLACEHOLDER</span></p>
-            <p>Total weight lifted: <span id="total-weight">PLACEHOLDER</span></p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="avg-duration-bar"></div>
+                <div class="progress-text-container">
+                    <span id="avg-duration-text"></span>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="total-weight-bar"></div>
+                <div class="progress-text-container">
+                    <span id="total-weight-text"></span>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const workoutsCompleted = 25; // TODO: Placeholder
+            const workoutsCompleted = 3; // TODO: Placeholder
             const goal = 25; // TODO: Placeholder
-            const avgDuration = "45 minutes"; // TODO: Placeholder
+            const avgDuration = 45; // TODO: Placeholder
+            const avgDurationLastMonth = 50; // TODO: Placeholder
             const totalWeight = 15000; // TODO: Placeholder
-
-            document.getElementById("workouts-completed").innerText = workoutsCompleted;
-            document.getElementById("goal").innerText = goal;
-            document.getElementById("avg-duration").innerText = avgDuration;
-            document.getElementById("total-weight").innerText = totalWeight + " kg";
+            const totalWeightLastMonth = 14000; // TODO: Placeholder
 
             const progressBar = document.getElementById("progress-bar");
+            const progressText = document.getElementById("progress-text");
+            const avgDurationBar = document.getElementById("avg-duration-bar");
+            const avgDurationText = document.getElementById("avg-duration-text");
+            const totalWeightBar = document.getElementById("total-weight-bar");
+            const totalWeightText = document.getElementById("total-weight-text");
+
             const progress = (workoutsCompleted / goal) * 100;
             progressBar.style.width = progress + "%";
-
-            if (progress >= 100) {
+            progressText.innerText = `Completed Workouts: ${workoutsCompleted}/${goal}`;
+            if (progress > 100) {
+                progressBar.classList.add("exceeded");
+                progressText.innerText += " (On Fire!)";
+            } else if (progress == 100) {
                 progressBar.classList.add("full");
+                progressText.innerText += " (On Fire!)";
             }
-            // TODO: celebration animation, currently placeholder
-            if (document.getElementById("progress-bar").classList.contains("full")) {
-                // TODO: impl fireworks.js possibly?
+
+            const avgProgress = (avgDuration / avgDurationLastMonth) * 100;
+            avgDurationBar.style.width = avgProgress + "%";
+            avgDurationText.innerText = `Average Duration: ${avgDuration} min (Last Month: ${avgDurationLastMonth} min)`;
+            if (avgProgress > 100) {
+                avgDurationBar.classList.add("exceeded");
+                avgDurationText.innerText += " (On Fire!)";
+            } else if (avgProgress == 100) {
+                avgDurationBar.classList.add("full");
+                avgDurationText.innerText += " (On Fire!)";
+            }
+
+            const weightProgress = (totalWeight / totalWeightLastMonth) * 100;
+            totalWeightBar.style.width = weightProgress + "%";
+            totalWeightText.innerText = `Total Weight Lifted: ${totalWeight} kg (Last Month: ${totalWeightLastMonth} kg)`;
+            if (weightProgress > 100) {
+                totalWeightBar.classList.add("exceeded");
+                totalWeightText.innerText += " (On Fire!)";
+            } else if (weightProgress == 100) {
+                totalWeightBar.classList.add("full");
+                totalWeightText.innerText += " (On Fire!)";
             }
         });
     </script>
