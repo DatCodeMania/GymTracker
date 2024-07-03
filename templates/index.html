@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar_styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js/dist/fireworks.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    
+    <title>Home Page</title>
 </head>
 <body>
+    <div id="fireworks-container" class="fireworks-container"></div>
     <nav class="navbar">
         <ul>
             <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a></li>
@@ -24,29 +30,26 @@
                 <div class="progress-text-container">
                     <span id="progress-text"></span>
                 </div>
-                <div id="workout-fireworks-container" class="fireworks-container"></div>
             </div>
             <div class="progress-bar-container" id="avg-duration-bar-container">
                 <div class="progress-bar" id="avg-duration-bar"></div>
                 <div class="progress-text-container">
                     <span id="avg-duration-text"></span>
                 </div>
-                <div id="avg-duration-fireworks-container" class="fireworks-container"></div>
             </div>
             <div class="progress-bar-container" id="total-weight-bar-container">
                 <div class="progress-bar" id="total-weight-bar"></div>
                 <div class="progress-text-container">
                     <span id="total-weight-text"></span>
                 </div>
-                <div id="total-weight-fireworks-container" class="fireworks-container"></div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const workoutsCompleted = 25; // TODO: Placeholder
-            const goal = 25; // TODO: Placeholder
+            const workoutsCompleted = 26; // TODO: Placeholder
+            const workoutsCompletedGoal = 25; // TODO: Placeholder
             const avgDuration = 50; // TODO: Placeholder
             const avgDurationLastMonth = 45; // TODO: Placeholder
             const totalWeight = 15000; // TODO: Placeholder
@@ -59,10 +62,10 @@
             const totalWeightBar = document.getElementById("total-weight-bar");
             const totalWeightText = document.getElementById("total-weight-text");
 
-            const progress = (workoutsCompleted / goal) * 100;
-            progressBar.style.width = progress + "%";
-            progressText.innerText = `Completed Workouts: ${workoutsCompleted}/${goal}`;
-            if (progress >= 100) {
+            const workoutProgress = (workoutsCompleted / workoutsCompletedGoal) * 100;
+            progressBar.style.width = workoutProgress + "%";
+            progressText.innerText = `Completed Workouts: ${workoutsCompleted}/${workoutsCompletedGoal}`;
+            if (workoutProgress >= 100) {
                 progressBar.classList.add("full");
                 progressText.innerText += " (On Fire!)";
             }
@@ -82,11 +85,22 @@
                 totalWeightBar.classList.add("full");
                 totalWeightText.innerText += " (On Fire!)";
             }
+
+            console.log('Workout Progress:', workoutProgress);
+            console.log('Avg Progress:', avgProgress);
+            console.log('Weight Progress:', weightProgress);
+
+            if (workoutProgress >= 100 && avgProgress >= 100 && weightProgress >= 100) {
+                console.log('Starting fireworks...');
+                startFireworks();
+            }
         });
 
-        const container = document.querySelector('.container')
-        const fireworks = new Fireworks.default()
-        fireworks.start()
+        function startFireworks() {
+            const container = document.getElementById('fireworks-container');
+            const fireworks = new Fireworks.default(container);
+            fireworks.start();
+        }
     </script>
 </body>
 </html>
