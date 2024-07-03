@@ -1,3 +1,4 @@
+/* static/index_styles.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
@@ -63,21 +64,14 @@ a:hover {
     height: 100%;
     width: 0;
     transition: width 1s;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 14px;
 }
 
 .progress-bar.full {
-    background: #27ae60;
+    background: #27ae60; /* Dark green for full progress bar */
 }
 
 .progress-bar.exceeded {
-    background: #e67e22;
+    background: #e67e22; /* Orange for exceeded progress bar */
 }
 
 .progress-text-container {
@@ -92,6 +86,16 @@ a:hover {
     color: #ffffff;
     font-weight: bold;
     font-size: 14px;
+}
+
+.fireworks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10; /* Ensure fireworks are on top */
 }
 
 @keyframes fadeIn {

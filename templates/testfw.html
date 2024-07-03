@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fireworks Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2/dist/fireworks.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+        }
+        #fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fireworks Test Page</h1>
+    <div id="fireworks-container"></div>
+
+    <script>
+        window.onload = function() {
+            console.log('Window loaded');
+            const container = document.getElementById('fireworks-container');
+            if (!container) {
+                console.error('Fireworks container not found');
+                return;
+            }
+            console.log('Fireworks container:', container);
+            try {
+                const fireworks = new Fireworks.default(container);
+                console.log('Fireworks initialized:', fireworks);
+                fireworks.start();
+                console.log('Fireworks started');
+            } catch (error) {
+                console.error('Error initializing fireworks:', error);
+            }
+        };
+    </script>
+</body>
+</html>

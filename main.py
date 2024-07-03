@@ -15,6 +15,10 @@ def about():
 def add_session():
     return render_template('add_session.html')
 
+@app.route('/testfw')
+def testfw():
+    return render_template('testfw.html')
+
 @app.route('/submit', methods=['POST'])
 def submit():
     selected_options = request.form.getlist('muscle_groups_trained')
@@ -56,6 +60,7 @@ def submit():
         Notes: {notes}<br>
         Exercises done: {exercises_done}
     '''
+
 
 if __name__ == '__main__':
     app.run(debug=True)

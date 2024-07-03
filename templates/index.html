@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index_styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar_styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js/dist/fireworks.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -18,33 +19,36 @@
         <h1>Home Page</h1>
         <p>Welcome to Gym Tracker!</p>
         <div class="statistics">
-            <div class="progress-bar-container">
+            <div class="progress-bar-container" id="workout-bar-container">
                 <div class="progress-bar" id="progress-bar"></div>
                 <div class="progress-text-container">
                     <span id="progress-text"></span>
                 </div>
+                <div id="workout-fireworks-container" class="fireworks-container"></div>
             </div>
-            <div class="progress-bar-container">
+            <div class="progress-bar-container" id="avg-duration-bar-container">
                 <div class="progress-bar" id="avg-duration-bar"></div>
                 <div class="progress-text-container">
                     <span id="avg-duration-text"></span>
                 </div>
+                <div id="avg-duration-fireworks-container" class="fireworks-container"></div>
             </div>
-            <div class="progress-bar-container">
+            <div class="progress-bar-container" id="total-weight-bar-container">
                 <div class="progress-bar" id="total-weight-bar"></div>
                 <div class="progress-text-container">
                     <span id="total-weight-text"></span>
                 </div>
+                <div id="total-weight-fireworks-container" class="fireworks-container"></div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const workoutsCompleted = 3; // TODO: Placeholder
+            const workoutsCompleted = 25; // TODO: Placeholder
             const goal = 25; // TODO: Placeholder
-            const avgDuration = 45; // TODO: Placeholder
-            const avgDurationLastMonth = 50; // TODO: Placeholder
+            const avgDuration = 50; // TODO: Placeholder
+            const avgDurationLastMonth = 45; // TODO: Placeholder
             const totalWeight = 15000; // TODO: Placeholder
             const totalWeightLastMonth = 14000; // TODO: Placeholder
 
@@ -58,10 +62,7 @@
             const progress = (workoutsCompleted / goal) * 100;
             progressBar.style.width = progress + "%";
             progressText.innerText = `Completed Workouts: ${workoutsCompleted}/${goal}`;
-            if (progress > 100) {
-                progressBar.classList.add("exceeded");
-                progressText.innerText += " (On Fire!)";
-            } else if (progress == 100) {
+            if (progress >= 100) {
                 progressBar.classList.add("full");
                 progressText.innerText += " (On Fire!)";
             }
@@ -69,10 +70,7 @@
             const avgProgress = (avgDuration / avgDurationLastMonth) * 100;
             avgDurationBar.style.width = avgProgress + "%";
             avgDurationText.innerText = `Average Duration: ${avgDuration} min (Last Month: ${avgDurationLastMonth} min)`;
-            if (avgProgress > 100) {
-                avgDurationBar.classList.add("exceeded");
-                avgDurationText.innerText += " (On Fire!)";
-            } else if (avgProgress == 100) {
+            if (avgProgress >= 100) {
                 avgDurationBar.classList.add("full");
                 avgDurationText.innerText += " (On Fire!)";
             }
@@ -80,14 +78,15 @@
             const weightProgress = (totalWeight / totalWeightLastMonth) * 100;
             totalWeightBar.style.width = weightProgress + "%";
             totalWeightText.innerText = `Total Weight Lifted: ${totalWeight} kg (Last Month: ${totalWeightLastMonth} kg)`;
-            if (weightProgress > 100) {
-                totalWeightBar.classList.add("exceeded");
-                totalWeightText.innerText += " (On Fire!)";
-            } else if (weightProgress == 100) {
+            if (weightProgress >= 100) {
                 totalWeightBar.classList.add("full");
                 totalWeightText.innerText += " (On Fire!)";
             }
         });
+
+        const container = document.querySelector('.container')
+        const fireworks = new Fireworks.default()
+        fireworks.start()
     </script>
 </body>
 </html>
