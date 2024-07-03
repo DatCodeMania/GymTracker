@@ -16,7 +16,42 @@
     </nav>
     <div class="container">
         <h1>Home Page</h1>
-        <p>Welcome to the home page!</p>
+        <p>Welcome to Gym Tracker!</p>
+        <div class="statistics">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar">
+                    <span id="progress-text"></span>
+                </div>
+            </div>
+            <p>Average workout duration: <span id="avg-duration">PLACEHOLDER</span></p>
+            <p>Total weight lifted: <span id="total-weight">PLACEHOLDER</span></p>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const workoutsCompleted = 25; // TODO: Placeholder
+            const goal = 25; // TODO: Placeholder
+            const avgDuration = "45 minutes"; // TODO: Placeholder
+            const totalWeight = 15000; // TODO: Placeholder
+
+            document.getElementById("workouts-completed").innerText = workoutsCompleted;
+            document.getElementById("goal").innerText = goal;
+            document.getElementById("avg-duration").innerText = avgDuration;
+            document.getElementById("total-weight").innerText = totalWeight + " kg";
+
+            const progressBar = document.getElementById("progress-bar");
+            const progress = (workoutsCompleted / goal) * 100;
+            progressBar.style.width = progress + "%";
+
+            if (progress >= 100) {
+                progressBar.classList.add("full");
+            }
+            // TODO: celebration animation, currently placeholder
+            if (document.getElementById("progress-bar").classList.contains("full")) {
+                // TODO: impl fireworks.js possibly?
+            }
+        });
+    </script>
 </body>
 </html>

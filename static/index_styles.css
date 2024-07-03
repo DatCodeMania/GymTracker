@@ -1,23 +1,29 @@
-/* static/home_styles.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #121212;
+    color: #e0e0e0;
     margin: 0;
     padding: 0;
+    padding-top: 60px;
 }
 
 h1 {
-    color: #333;
+    color: #ffffff;
     text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 
 p {
     text-align: center;
     font-size: 1.2em;
+    color: #b0b0b0;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
 }
 
 a {
-    color: #3498db;
+    color: #82b1ff;
     text-decoration: none;
 }
 
@@ -29,8 +35,59 @@ a:hover {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin-top: 50px;
     border-radius: 8px;
+    opacity: 0;
+    animation: slideIn 1s forwards;
+}
+
+.statistics {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    background: #333;
+    border-radius: 25px;
+    margin: 20px auto;
+    width: 80%;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    background: #82b1ff;
+    height: 100%;
+    width: 0;
+    transition: width 1s;
+}
+
+.progress-bar.full {
+    background: #76ff03;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
 }
