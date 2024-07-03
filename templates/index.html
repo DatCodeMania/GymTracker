@@ -45,6 +45,7 @@
             </div>
         </div>
     </div>
+    <div class="rainbow-text" id="rainbow-text">You exceeded all your goals!</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -93,13 +94,59 @@
             if (workoutProgress >= 100 && avgProgress >= 100 && weightProgress >= 100) {
                 console.log('Starting fireworks...');
                 startFireworks();
+                showRainbowText();
             }
+
+            document.addEventListener('click', fadeOutAllElements); // fade everything out to stop annoyance.
         });
 
         function startFireworks() {
             const container = document.getElementById('fireworks-container');
             const fireworks = new Fireworks.default(container);
             fireworks.start();
+        }
+
+        function stopFireworks() {
+            const container = document.getElementById('fireworks-container');
+            container.innerHTML = '';
+        }
+
+        function showRainbowText() {
+            const textElement = document.getElementById('rainbow-text');
+            const container = document.querySelector('.container');
+            const navbar = document.querySelector('.navbar');
+            
+            textElement.style.display = 'block';
+            textElement.classList.add('fade-in');
+            container.classList.add('blurred');
+            navbar.classList.add('blurred');
+
+            setTimeout(() => {
+                textElement.classList.add('fade-out');
+                setTimeout(() => {
+                    textElement.style.display = 'none';
+                    container.classList.add('unblur');
+                    navbar.classList.add('unblur');
+                    stopFireworks();
+                }, 1000);
+            }, 4000);
+        }
+
+        function fadeOutAllElements() {
+            const textElement = document.querySelector('.rainbow-text');
+            const blurredElements = document.querySelectorAll('.blurred');
+            textElement.classList.add('fade-out');
+            blurredElements.forEach(element => {
+                element.classList.add('fade-out');
+            });
+            setTimeout(() => {
+                textElement.style.display = 'none';
+                blurredElements.forEach(element => {
+                    element.classList.remove('blurred');
+                    element.classList.remove('fade-out');
+                });
+                stopFireworks();
+            }, 1000);
         }
     </script>
 </body>
